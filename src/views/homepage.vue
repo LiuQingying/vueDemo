@@ -1,5 +1,10 @@
 <template>
-  <h1>{{ title }}</h1>
+  <div>
+    <h1>{{ title }}</h1>
+    <button @click="reverseMessage">
+      反转消息
+    </button>
+  </div>
 </template>
 <script>
 export default {
@@ -13,6 +18,11 @@ export default {
   data() {
     return {
       title: '标题'
+    }
+  },
+  methods: {
+    reverseMessage() {
+      this.title = this.title.split('').reverse().join('')
     }
   }
 }
