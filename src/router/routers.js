@@ -13,7 +13,7 @@ const routers = [
   {
     path: '/homepage',
     name: 'homepage',
-    component: () => import('@/views/homepage')
+    component: () => import('@/views/HomePage')
   },
   {
     path: '/',
