@@ -1,11 +1,11 @@
 <template>
   <div>
-    <tabbar />
+    <tabbar :click-tab="onClickTab" :select-tab="0" />
     <h1>{{ title }}</h1>
     <button :class="{active: isActive}" :style="styleObject" @click="reverseMessage">
       反转消息
     </button>
-    <input v-model="question">
+    <input v-model="question" class="input-test">
   </div>
 </template>
 <script>
@@ -28,8 +28,7 @@ export default {
       isActive: true,
       styleObject: {
         color: 'red',
-        fonSize: '13px',
-        display: 'block'
+        fonSize: '13px'
       }
     }
   },
@@ -41,9 +40,16 @@ export default {
       console.log(newQ, old)
     }
   },
+  created() {
+    console.log('Component is mounted!', this.title)
+  },
   methods: {
     reverseMessage() {
-      this.title = this.title.split('').reverse().join('')
+      this.question = this.question.split('').reverse().join('')
+    },
+
+    onClickTab(index) {
+      console.log('点击', index)
     }
   }
 }
@@ -51,5 +57,8 @@ export default {
 <style scoped>
   .active {
     height: 40px;
+  }
+  .input-test {
+    height: 35px;
   }
 </style>

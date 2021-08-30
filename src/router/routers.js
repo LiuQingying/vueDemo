@@ -16,6 +16,16 @@ const routers = [
     component: () => import('@/views/HomePage')
   },
   {
+    path: '/shopping',
+    name: 'shopping',
+    component: () => import('@/views/ShoppingCart')
+  },
+  {
+    path: '/my',
+    name: 'my',
+    component: () => import('@/views/My')
+  },
+  {
     path: '/',
     name: '404',
     component: () => import('@/views/404')

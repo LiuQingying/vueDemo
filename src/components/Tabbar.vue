@@ -1,12 +1,12 @@
 <template>
   <div class="tabbar">
-    <div class="tab" :class="{ active: selectTab === 0}" @click="onClickTab(0)">
+    <div class="tab" :class="{ active: selectedTab === 0}" @click="onClickTab(0)">
       首页
     </div>
-    <div class="tab" :class="{ active: selectTab === 1}" @click="onClickTab(1)">
+    <div class="tab" :class="{ active: selectedTab === 1}" @click="onClickTab(1)">
       购物车
     </div>
-    <div class="tab" :class="{ active: selectTab === 2}" @click="onClickTab(2)">
+    <div class="tab" :class="{ active: selectedTab === 2}" @click="onClickTab(2)">
       我的
     </div>
   </div>
@@ -28,10 +28,19 @@ export function loginByUsername(username, password, code, uuid) {
 }
 export default {
   name: 'Tabbar',
+  props: {
+    clickTab: {
+      type: Function,
+      default: function() {}
+    },
+    selectTab: {
+      type: Number,
+      default: 0
+    }
+  },
   data: function() {
     return {
-      selectTab: 0
-
+      selectedTab: this.selectTab
     }
   },
   setup: {
@@ -41,7 +50,21 @@ export default {
 
   methods: {
     onClickTab(index) {
-      this.selectTab = index
+      this.clickTab(index)
+      this.selectedTab = index
+      switch (index) {
+        case 0:
+          this.$router.push('homepage')
+
+          break
+        case 1:
+          this.$router.push('shopping')
+
+          break
+        default:
+          this.$router.push('my')
+          break
+      }
       loginByUsername(1, 1, 1, 1).then(response => {
         console.log(response)
       }).catch(error => {
@@ -53,7 +76,7 @@ export default {
 
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
   .tabbar {
     display: flex;
     align-items: center;
